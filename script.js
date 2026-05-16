@@ -8,7 +8,7 @@ const saved = localStorage.getItem('todos');
 const todos = saved ? JSON.parse(saved) : [];
 
 function saveTodos() {
-    // Save current todos array to localStorage
+    //Save current todos array to localStorage
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
@@ -36,15 +36,43 @@ function createTodoNode(todo, index) {
         textSpan.style.textDecoration = 'line-through';
     }
     // Add double-click event listener to edit todo
-    textSpan.addEventListener("dblclick", () => {
-        const newText = prompt("Edit todo", todo.text);
-        if (newText !== null) {
-            todo.text = newText.trim()
-            textSpan.textContent = todo.text;
-            saveTodos();
-        }
-    })
+   textSpan.addEventListener("dblclick", function () {
 
+    const edit_input = document.createElement("input");
+    edit_input.type = "text";
+    edit_input.value = todo.text;
+    edit_input.className = "edit-input";
+
+    textSpan.replaceWith(edit_input);
+    edit_input.focus();
+
+    function saveEdit() {
+        const newText = edit_input.value.trim();
+
+        if (newText !== "") {
+            todo.text = newText;
+        }
+
+        const newSpan = document.createElement("span");
+        newSpan.textContent = todo.text;
+
+        // Reattach SAME handler
+        newSpan.addEventListener("dblclick", arguments.callee);
+
+        edit_input.replaceWith(newSpan);
+        saveTodos();
+    }
+
+    // Enter key
+    edit_input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            saveEdit();
+        }
+    });
+
+    // Click outside
+    edit_input.addEventListener("blur", saveEdit);
+});
     // Delete Todo Button 
     const delBtn = document.createElement('button');
     delBtn.textContent = "Delete";
