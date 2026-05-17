@@ -155,6 +155,7 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 /* Responsive */
@@ -167,5 +168,10 @@ p {
   }
   #todo-list {
     width: 300px;
-  }
+  }}
+ .edit-input {
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    outline: none;
 }

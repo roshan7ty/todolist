@@ -39,6 +39,7 @@ function createTodoNode(todo, index) {
    textSpan.addEventListener("dblclick", function () {
 
     const edit_input = document.createElement("input");
+    edit_input .className = "edit-input";
     edit_input.type = "text";
     edit_input.value = todo.text;
     edit_input.className = "edit-input";
@@ -54,6 +55,7 @@ function createTodoNode(todo, index) {
         }
 
         const newSpan = document.createElement("span");
+        
         newSpan.textContent = todo.text;
 
         // Reattach SAME handler
