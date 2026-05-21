@@ -36,7 +36,10 @@ function createTodoNode(todo, index) {
         textSpan.style.textDecoration = 'line-through';
     }
     // Add double-click event listener to edit todo
-   textSpan.addEventListener("dblclick", function () {
+   textSpan.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+
+    window.getSelection().removeAllRanges();
 
     const edit_input = document.createElement("input");
     edit_input .className = "edit-input";

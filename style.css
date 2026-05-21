@@ -175,3 +175,12 @@ p {
     border: 1px solid #ccc;
     outline: none;
 }
+span {
+    user-select: none;
+    cursor: pointer;
+}
+#todo-list span {
+    user-select: none;
+    -webkit-user-select: none; /* Safari/Chrome */
+    -ms-user-select: none;     /* old Edge */
+}
